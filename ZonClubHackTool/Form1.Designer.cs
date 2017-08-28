@@ -34,6 +34,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btExport = new System.Windows.Forms.Button();
+            this.btSearch = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -80,12 +81,23 @@
             this.btExport.UseVisualStyleBackColor = true;
             this.btExport.Click += new System.EventHandler(this.btExport_Click);
             // 
+            // btSearch
+            // 
+            this.btSearch.Location = new System.Drawing.Point(678, 3);
+            this.btSearch.Name = "btSearch";
+            this.btSearch.Size = new System.Drawing.Size(75, 23);
+            this.btSearch.TabIndex = 4;
+            this.btSearch.Text = "Search";
+            this.btSearch.UseVisualStyleBackColor = true;
+            this.btSearch.Click += new System.EventHandler(this.btSearch_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(862, 482);
+            this.Controls.Add(this.btSearch);
             this.Controls.Add(this.btExport);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.progressBar1);
@@ -108,6 +120,7 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btExport;
+        private System.Windows.Forms.Button btSearch;
     }
 }
 

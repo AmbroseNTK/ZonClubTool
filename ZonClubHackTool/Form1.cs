@@ -83,35 +83,58 @@ namespace ZonClubHackTool
             MatchCollection collection = regex.Matches(listTai);
             if (collection.Count != 0)
             {
-                TaiXiu newbie = new TaiXiu();
-                newbie.setData(collection[collection.Count - 1].Groups[0].Value);
-                newbie.Location = new Point(currentX, currentY);
-                listTaiXiu.Add(newbie);
-                panel1.Controls.Add(newbie);
-                currentX += 100;
-                if (currentX == 800)
-                {
-                    currentY += 90;
-                    currentX = 0;
-                }
+                addNewTai(collection);
+                render();
             }
 
         }
-
+        public void addNewTai(MatchCollection collection)
+        {
+            TaiXiu newbie = new TaiXiu();
+            newbie.setData(collection[collection.Count - 1].Groups[0].Value);
+            newbie.Location = new Point(currentX, currentY);
+            listTaiXiu.Add(newbie);
+            currentX += 100;
+            if (currentX == 800)
+            {
+                currentY += 90;
+                currentX = 0;
+            }
+        }
+        public void render()
+        {
+            foreach(TaiXiu tai in listTaiXiu)
+            {
+                panel1.Controls.Remove(tai);
+                panel1.Controls.Add(tai);
+            }
+        }
         private void btExport_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Title = "Export to...";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                string data = "";
+                List<string> data = new List<string>();
                 foreach(TaiXiu t in listTaiXiu)
                 {
-                    data += t.Data+"\n";
+                    data.Add(t.Data);
                 }
-                File.WriteAllText(saveFileDialog.FileName, data);
+                File.WriteAllLines(saveFileDialog.FileName, data);
 
             }
+        }
+
+        private void btSearch_Click(object sender, EventArgs e)
+        {
+            SearchForm searchForm = new SearchForm();
+            List<string> data = new List<string>();
+            foreach (TaiXiu t in listTaiXiu)
+            {
+                data.Add(t.Data);
+            }
+            searchForm.DataMatchCollection = data;
+            searchForm.ShowDialog();
         }
     }
 }
